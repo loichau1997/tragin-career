@@ -7,6 +7,7 @@ import RelatedJobs from "../../components/singleJob/RelatedJobs";
 import { useRouter } from "next/router";
 import useFetch from "../api/useFetch";
 import { server } from "../../config";
+import Swal from "sweetalert2";
 
 const SingleJob = () => {
   const router = useRouter();
@@ -35,6 +36,18 @@ const SingleJob = () => {
       !_id.includes(job._id) && // this will exclude the jobs that have the same _id as the current job
       (job.title === title || job.category === category)
   );
+
+  const alertHandalar = ()=>{
+    Swal.fire({
+      icon: 'info',
+      title: 'Oops...',
+      text: 'Sorry you can’t apply now. Very soon you will be able to apply. For now, you can only see job posts and enjoy multi-stage filtering and view details of the job. Thank you.',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, got it!'
+    })
+  }
   
 
   return !loading ? (
@@ -133,7 +146,7 @@ const SingleJob = () => {
               </div>
               <div className="flex justify-end mt-3">
                 <button
-                
+                onClick={alertHandalar}
                   className="btn btn-primary flex-shrink-0"
                 >
                   apply now

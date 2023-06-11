@@ -4,7 +4,21 @@ import JobSkillTags from "../common/JobSkillTags";
 import { FaBookmark } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Skeleton from "../loading-skeleton/Skeleton";
+import Swal from "sweetalert2";
 const JobList = ({ jobs, loading }) => {
+
+  const alertHandalar = ()=>{
+    Swal.fire({
+      icon: 'info',
+      title: 'Oops...',
+      text: 'Sorry we are under construction. Very soon we will open this feature.',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, got it!'
+    })
+  }
+
   return !loading ? (
     <>
       {jobs.length > 0 ? (
@@ -33,7 +47,7 @@ const JobList = ({ jobs, loading }) => {
                 </div>
 
                 <div>
-                  <button className="bg-slate-100 px-3 py-1 rounded-md flex-align-center gap-x-2 flex-shrink-0 text-muted hover:bg-slate-200 dark:bg-hover-color dark:hover:bg-[#252532]">
+                  <button onClick={alertHandalar} className="bg-slate-100 px-3 py-1 rounded-md flex-align-center gap-x-2 flex-shrink-0 text-muted hover:bg-slate-200 dark:bg-hover-color dark:hover:bg-[#252532]">
                     <span>Save Job</span>
                     <FaBookmark />
                   </button>

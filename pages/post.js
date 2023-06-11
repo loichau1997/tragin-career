@@ -4,6 +4,7 @@ import { BiTag } from "react-icons/bi";
 import { FaCamera, FaTimes } from "react-icons/fa";
 import { FiChevronLeft } from "react-icons/fi";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 const PostJob = () => {
 
@@ -28,6 +29,15 @@ const PostJob = () => {
   const removeTag = (id) => {
     setTags(tags.filter((tag) => tag.id !== id));
   };
+
+
+  const alertHandalar = ()=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Sorry, this job post is only available for admin access and is currently under construction. Thank you for your understanding.'
+    })
+  }
 
   return (
     <>
@@ -148,7 +158,7 @@ const PostJob = () => {
           <input type="checkbox" name="" id="terms" />
           <label htmlFor="terms">I agree to the terms & conditions</label>
         </div>
-        <button className="btn btn-primary w-full my-4">post job</button>
+        <button onClick={alertHandalar} className="btn btn-primary w-full my-4">post job</button>
       </div>
     </>
   );

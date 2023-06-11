@@ -4,10 +4,24 @@ import { BiFile, BiLink } from "react-icons/bi";
 import { FaLinkedin } from "react-icons/fa";
 import { FiChevronLeft } from "react-icons/fi";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 const Appy = () => {
   const fileInput = useRef(null);
   const [file, setFile] = useState("");
+
+  const alertHandalar = ()=>{
+    Swal.fire({
+      icon: 'info',
+      title: 'Oops...',
+      text: 'Sorry you can’t apply now. Very soon you will be able to apply. For now, you can only see job posts and enjoy multi-stage filtering and view details of the job. Thank you.',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, got it!'
+    })
+  }
+
   return (
     <>
       <div className="rounded max-w-3xl w-full mx-auto">
@@ -45,7 +59,7 @@ const Appy = () => {
             <div>
               <p>LinkedIn Profile</p>
               <button className="btn bg-[#1275B1] hover:bg-[#0f6397] text-white">
-                <a href="www/linkedin.com" className="flex-align-center gap-2">
+                <a href="" className="flex-align-center gap-2">
                   <FaLinkedin />
                   <span>Apply with LinkedIn</span>
                 </a>
@@ -92,8 +106,8 @@ const Appy = () => {
                 type="text"
                 name="name"
                 className="input"
-                value=""
-                onChange={() => {}}
+             
+             
                 required
               />
               <label htmlFor="name">First Name</label>
@@ -103,8 +117,8 @@ const Appy = () => {
                 type="text"
                 name="name"
                 className="input"
-                value=""
-                onChange={() => {}}
+              
+             
                 required
               />
               <label htmlFor="name">Last Name</label>
@@ -132,8 +146,8 @@ const Appy = () => {
               type="text"
               name="email"
               className="input"
-              value=""
-              onChange={() => {}}
+             
+              
               required
             />
             <label htmlFor="email">Email Address</label>
@@ -150,7 +164,7 @@ const Appy = () => {
             <input type="checkbox" name="" id="terms" />
             <label htmlFor="terms">I agree to the terms & conditions</label>
           </div>
-          <button className="btn btn-primary w-full my-4">
+          <button onClick={alertHandalar} className="btn btn-primary w-full my-4">
             submit application
           </button>
         </form>
