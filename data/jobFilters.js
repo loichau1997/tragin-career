@@ -6,11 +6,7 @@ export const filters = [
       "Information Technology",
       "Marketing",
       "Design",
-      "Sales",
-      "Finance",
-      "Human Resources",
       "Operations",
-      "Customer Service",
     ],
   },
   {
@@ -19,10 +15,7 @@ export const filters = [
     filters: [
       "Full Time",
       "Part Time",
-      "Internship",
-      "Freelance",
       "Remote",
-      "Contract",
     ],
   },
   {

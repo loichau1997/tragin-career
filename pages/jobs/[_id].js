@@ -132,12 +132,12 @@ const SingleJob = () => {
                 ))}
               </div>
               <div className="flex justify-end mt-3">
-                <Link
-                  href="/jobs/apply"
+                <button
+                
                   className="btn btn-primary flex-shrink-0"
                 >
                   apply now
-                </Link>
+                </button>
               </div>
             </div>
           </div>
