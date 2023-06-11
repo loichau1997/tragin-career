@@ -43,7 +43,7 @@ const SingleJob = () => {
         <div className="card overflow-hidden">
           <div className="relative">
             <img
-              src="/images/photo-3.jpg"
+              src="/images/details.png"
               alt=""
               className="h-full sm:h-[200px] object-cover w-full"
             />

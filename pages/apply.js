@@ -23,7 +23,7 @@ const Appy = () => {
 
         <div className="relative mt-5">
           <img
-            src="/images/joine.png"
+            src="/images/job.jpg"
             alt=""
             className="h-[200px] object-cover w-full rounded-tl-xl rounded-tr-xl"
           />
