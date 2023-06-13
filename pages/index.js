@@ -23,9 +23,13 @@ const Home = () => {
     if (e.target.classList.contains("filter-modal"))
       dispatch({ type: actioTypes.closeFilterMenu });
   };
-  const { data: jobs, loading } = useFetch(`${server}/api/jobs`);
+  const { data: jobs, loading } = useFetch(`${server}/api/v1/hiring-role/get?apiKey=g436739d6734gd6734`);
 
-  console.log("job test ", jobs)
+  // console.log("job test ", jobs)
+
+  // const jobs = jobsData.Data
+
+  console.log("point on job", jobs)
 
   const [selectedFilters, setSelectedFilters] = useState({});
 
@@ -47,7 +51,7 @@ const Home = () => {
   };
 
   //  Filter through jobs that match the selected filters
-  let filteredJobs = jobs.filter((job) => {
+  let filteredJobs = jobs?.filter((job) => {
     for (const [filterName, selectedValues] of Object.entries(
       selectedFilters
     )) {
@@ -65,8 +69,8 @@ const Home = () => {
   const counts = {};
   filters.forEach((filter) => {
     filter.filters.forEach((value) => {
-      const filtered = jobs.filter((job) => job[filter.name] === value);
-      counts[value] = filtered.length;
+      const filtered = jobs?.filter((job) => job[filter.name] === value);
+      counts[value] = filtered?.length;
     });
   });
 
@@ -105,7 +109,7 @@ const Home = () => {
       ...prevResults,
       location: filterJobsByField(
         jobs,
-        "office_location",
+        "working_type",
         searchQueries.location
       ),
     }));
@@ -136,7 +140,7 @@ const Home = () => {
   };
 
   // Handle Search------------------------------------------------------------------------------------
-  const filteredJobsBySearch = jobs.filter((job) => {
+  const filteredJobsBySearch = jobs?.filter((job) => {
     let isTitleMatch = true;
     let isLocationMatch = true;
     let isTypeMatch = true;
@@ -146,7 +150,7 @@ const Home = () => {
         .includes(searchQueries.title.toLowerCase());
     }
     if (searchQueries.location) {
-      isLocationMatch = job.office_location
+      isLocationMatch = job.working_type
         .toLowerCase()
         .includes(searchQueries.location.toLowerCase());
     }
@@ -174,11 +178,11 @@ const Home = () => {
   const jobsPerPage = 4;
 
   const endOffset = offset + jobsPerPage;
-  const currentJobs = jobsToDisplay.slice(offset, endOffset);
-  const pageCount = Math.ceil(jobsToDisplay.length / jobsPerPage);
+  const currentJobs = jobsToDisplay?.slice(offset, endOffset);
+  const pageCount = Math.ceil(jobsToDisplay?.length / jobsPerPage);
 
   const handlePageClick = (e) => {
-    const newOffset = (e.selected * jobsPerPage) % jobsToDisplay.length;
+    const newOffset = (e.selected * jobsPerPage) % jobsToDisplay?.length;
     setOffset(newOffset);
   };
 
@@ -246,7 +250,7 @@ const Home = () => {
                 </div>
                 <h3 className="text-sm">
                   <span className="text-muted">Showing: </span>
-                  {jobsToDisplay.length} Jobs
+                  {jobsToDisplay?.length} Jobs
                 </h3>
               </div>
               <div className="flex-align-center gap-2">

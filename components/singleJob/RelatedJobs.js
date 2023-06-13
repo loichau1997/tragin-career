@@ -7,17 +7,17 @@ const RelatedJobs = ({ jobs }) => {
     <div className="mt-5">
       <h1 className="text-xl font-bold">Related Jobs</h1>
       {jobs?.map((job) => (
-        <div className="card p-3 mt-3 group" key={job._id}>
+        <div className="card p-3 mt-3 group" key={job.id}>
           <div className="flex-align-center gap-x-2">
       
             <div className="flex-1">
-              <Link href="/jobs/[_id]" as={`/jobs/${job?._id}`}>
+              <Link href="/jobs/[id]" as={`/jobs/${job?.id}`}>
                 <a className="group-hover:text-primary transition-a">
                   <h1 className="font-bold text-lg">{job?.title}</h1>
                 </a>
               </Link>
               <h1 className="text-sm">
-                <span className="text-muted">{job?.office_location}</span>
+                <span className="text-muted">{job?.working_type}</span>
               </h1>
             </div>
             <div className="icon-box card-shadow dark:shadow-none !rounded-md card-bordered">

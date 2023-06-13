@@ -7,7 +7,7 @@ import Skeleton from "../loading-skeleton/Skeleton";
 import Swal from "sweetalert2";
 const JobList = ({ jobs, loading }) => {
 
-  const alertHandalar = ()=>{
+  const alertHandalar = () => {
     Swal.fire({
       icon: 'info',
       title: 'Oops...',
@@ -21,12 +21,12 @@ const JobList = ({ jobs, loading }) => {
 
   return !loading ? (
     <>
-      {jobs.length > 0 ? (
+      {jobs?.length > 0 ? (
         <>
           {jobs?.map((job) => (
             <motion.div
               className="card p-4 mt-3 group"
-              key={job?._id}
+              key={job?.id}
               initial={{ scale: 0.6, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.6, opacity: 0 }}
@@ -35,7 +35,7 @@ const JobList = ({ jobs, loading }) => {
                 <div className="flex-align-center gap-3">
 
                   <div>
-                    <Link href="/jobs/[_id]" as={`/jobs/${job?._id}`}>
+                    <Link href="/jobs/[id]" as={`/jobs/${job?.id}`}>
                       <a className="group-hover:text-primary transition-a">
                         <h1 className="text-xl font-semibold">{job?.title}</h1>
                       </a>
@@ -78,7 +78,7 @@ const JobList = ({ jobs, loading }) => {
                   </h1>
                 </div>
                 <div className="flex-align-center gap-x-4 mt-4 sm:mt-0">
-                  <Link href="/jobs/[_id]" as={`/jobs/${job?._id}`}>
+                  <Link href="/jobs/[id]" as={`/jobs/${job?.id}`}>
                     <a className="btn flex-shrink-0 bg-slate-100 hover:bg-slate-200 text-muted dark:bg-hover-color dark:hover:bg-[#252532]">
                       details
                     </a>

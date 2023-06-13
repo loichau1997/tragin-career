@@ -109,7 +109,7 @@ const Search = () => {
       ...prevResults,
       location: filterJobsByField(
         jobs,
-        "office_location",
+        "working_type",
         searchQueries.location
       ),
     }));
@@ -150,7 +150,7 @@ const Search = () => {
         .includes(searchQueries.title.toLowerCase());
     }
     if (searchQueries.location) {
-      isLocationMatch = job.office_location
+      isLocationMatch = job.working_type
         .toLowerCase()
         .includes(searchQueries.location.toLowerCase());
     }

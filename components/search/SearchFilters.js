@@ -12,15 +12,15 @@ const SearchFilters = ({
   reset,
 }) => {
   const titles = [
-    ...new Set(autoCompletedResults.title.map((job) => job.title)),
+    ...new Set(autoCompletedResults?.title?.map((job) => job?.title)),
   ];
   const locations = [
     ...new Set(
-      autoCompletedResults.location.map((job) => job.office_location)
+      autoCompletedResults?.location?.map((job) => job?.working_type)
     ),
   ];
   const types = [
-    ...new Set(autoCompletedResults.type.map((job) => job.position_type)),
+    ...new Set(autoCompletedResults?.type?.map((job) => job?.position_type)),
   ];
   return (
     <div>

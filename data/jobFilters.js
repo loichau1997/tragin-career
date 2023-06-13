@@ -1,20 +1,21 @@
 export const filters = [
-  {
-    label: "category",
-    name: "category",
-    filters: [
-      "Information Technology",
-      "Marketing",
-      "Design",
-      "Operations",
-    ],
-  },
+  // {
+  //   label: "category",
+  //   name: "category",
+  //   filters: [
+  //     "Information Technology",
+  //     "Marketing",
+  //     "Design",
+  //     "Operations",
+  //   ],
+  // },
   {
     label: "type of employment",
     name: "position_type",
     filters: [
       "Full Time",
       "Part Time",
+      "volunteer",
       "Remote",
     ],
   },
@@ -23,7 +24,7 @@ export const filters = [
     name: "experience_level",
     filters: [
       "Senior Level",
-      "Entry Level",
+      "Junior Level",
       "Mid Level"
     ],
   },

@@ -88,7 +88,7 @@ const PostJob = () => {
                 value={tag}
                 onChange={(e) => setTag(e.target.value)}
               />
-              <label htmlFor="name">Add skills</label>
+              <label htmlFor="name">Add tag</label>
             </div>
 
             <div className="flex-align-center gap-2 flex-wrap">

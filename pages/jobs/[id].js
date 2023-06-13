@@ -11,29 +11,53 @@ import Swal from "sweetalert2";
 
 const SingleJob = () => {
   const router = useRouter();
-  const { _id } = router.query;
-  const { data: job, loading } = useFetch(`${server}/api/jobs/${_id}`);
+  const { id } = router.query;
+  // console.log("id check", id)
+  const { data: job, loading } = useFetch(`${server}/api/v1/hiring-role/get/${id}?apiKey=g436739d6734gd6734`);
+// const job = jobData.Data
 
+console.log("only job from single job", job)
 
-  const {
-    title,
-    category,
-    office_location,
-    skills,
-    experience_level,
-    position_type,
-    salary_range,
-    experience,
-    description,
-    requirements_and_responsibilities,
-    logo_url,
-  } = job;
+  // const {
+  //   title,
+  //   category,
+  //   working_type,
+  //   tag,
+  //   experience_level,
+  //   position_type,
+  //   salary_range,
+  //   experience,
+  //   description,
+  //   requirements_and_responsibilities,
+  //   logo_url,
+  // } = job;
 
-  const { data: jobs } = useFetch(`${server}/api/jobs`);
+  // if (job) {
+  //   const {
+  //     title,
+  //     category,
+  //     working_type,
+  //     tag,
+  //     experience_level,
+  //     position_type,
+  //     salary_range,
+  //     experience,
+  //     description,
+  //     requirements_and_responsibilities,
+  //     logo_url,
+  //   } = job;
+  //   // do something with the properties
+  // }
+
+  const { data: jobs } = useFetch(`${server}/api/v1/hiring-role/get?apiKey=g436739d6734gd6734`);
+
+  // const jobs = jobsData.data
+
+  console.log("job test on id", jobs)
 
   const relatedJobs = jobs?.filter(
     (job) => 
-      !_id.includes(job._id) && // this will exclude the jobs that have the same _id as the current job
+      !id.includes(job.id) && // this will exclude the jobs that have the same id as the current job
       (job.title === title || job.category === category)
   );
 
@@ -68,7 +92,7 @@ const SingleJob = () => {
           </div>
           <div className="pt-10 px-6 pb-6">
             <div className="flex-center-between">
-              <h1 className="text-xl font-semibold">{title}</h1>
+              <h1 className="text-xl font-semibold">{job?.title}</h1>
               <div className="flex-align-center gap-x-2">
                 <div className="icon-box card-shadow dark:shadow-none card-bordered !rounded-md">
                   <BiBookmark />
@@ -81,7 +105,7 @@ const SingleJob = () => {
             <div className="flex-center-between gap-x-2 mt-1">
               <p className="text-sm">
                 {/* <span className="text-primary">{category}</span>{" "} */}
-                <span className="text-primary">{office_location}</span>
+                <span className="text-primary">{job?.working_type}</span>
               </p>
 
               <span className="text-sm ">
@@ -92,7 +116,7 @@ const SingleJob = () => {
 
             {/*---------------------------------------- Skills------------------------------------- */}
             <div className="mt-8">
-              <JobSkillTags skills={skills} />
+              <JobSkillTags tag={job?.tag} />
             </div>
 
             {/*---------------------------------------- About ------------------------------------ */}
@@ -103,21 +127,21 @@ const SingleJob = () => {
                     <span className="text-sm capitalize text-muted">
                       Experience
                     </span>
-                    <h1 className="capitalize">{experience}</h1>
+                    <h1 className="capitalize">{job?.experience}</h1>
                   </div>
                   <div className="w-full h-[1px] sm:h-16 sm:w-[1px] bg-slate-200 dark:bg-hover-color"></div>
                   <div className="p-2">
                     <span className="text-sm capitalize text-muted">
                       work level
                     </span>
-                    <h1 className="capitalize">{experience_level}</h1>
+                    <h1 className="capitalize">{job?.experience_level}</h1>
                   </div>
                   <div className="w-full h-[1px] sm:h-16 sm:w-[1px] bg-slate-200 dark:bg-hover-color"></div>
                   <div className="p-2">
                     <span className="text-sm capitalize text-muted">
                       employee type
                     </span>
-                    <h1 className="capitalize">{position_type}</h1>
+                    <h1 className="capitalize">{job?.position_type}</h1>
                   </div>
                   <div className="w-full h-[1px] sm:h-16 sm:w-[1px] bg-slate-200 dark:bg-hover-color"></div>
          
@@ -128,22 +152,38 @@ const SingleJob = () => {
             {/*---------------------------------------- Job Overview--------------------------------------------- */}
             <div className="mt-4">
               <h1 className="text-lg font-semibold">Overview</h1>
-              <p className="leading-7">{description}</p>
+              <p className="leading-7">{job?.description}</p>
             </div>
 
             {/*---------------------------------------- Job Description And Others------------------------------------- */}
             <div className="mt-4">
               <h1 className="text-lg font-semibold">
-                Responsibilities & Requirements
+              Requirements
               </h1>
               <div className="mt-3">
-                {requirements_and_responsibilities?.map((res, i) => (
+                {job?.requirement?.map((res, i) => (
                   <div className="flex-align-center gap-x-2 mt-3" key={i}>
                     <BiCircle className="text-xs text-primary flex-shrink-0" />
                     <p className="text-sm">{res}</p>
                   </div>
                 ))}
               </div>
+
+              <h1 className="text-lg mt-3 font-semibold">
+                Responsibilities 
+              </h1>
+              <div className="mt-3">
+                {job?.responsibility?.map((res, i) => (
+                  <div className="flex-align-center gap-x-2 mt-3" key={i}>
+                    <BiCircle className="text-xs text-primary flex-shrink-0" />
+                    <p className="text-sm">{res}</p>
+                  </div>
+                ))}
+              </div>
+
+
+
+
               <div className="flex justify-end mt-3">
                 <button
                 onClick={alertHandalar}
