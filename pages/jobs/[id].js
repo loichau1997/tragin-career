@@ -12,14 +12,41 @@ import Swal from "sweetalert2";
 const SingleJob = () => {
   const router = useRouter();
   const { id } = router.query;
-  // console.log("id check", id)
+  console.log("id check", id)
   const { data: job, loading } = useFetch(`${server}/api/v1/hiring-role/get/${id}?apiKey=g436739d6734gd6734`);
+console.log("loading test", loading)
+  console.log("only job from single job", job)
+// console.log("env test", process.env.KEY)
 
-console.log("env test", process.env.KEY)
 
-// const job = jobData.Data
 
-console.log("only job from single job", job)
+  // const {
+  //   title,
+  //   category,
+  //   working_type,
+  //   tag,
+  //   experience_level,
+  //   position_type,
+  //   salary_range,
+  //   experience,
+  //   description,
+  //   requirements_and_responsibilities,
+  //   logo_url,
+  // } = job;
+
+  // const {
+  //   title = "",
+  //   category = "",
+  //   working_type = "",
+  //   tag = "",
+  //   experience_level = "",
+  //   position_type = "",
+  //   salary_range = "",
+  //   experience = "",
+  //   description = "",
+  //   requirements_and_responsibilities = "",
+  //   logo_url = "",
+  // } = job;
 
   const {
     title,
@@ -33,7 +60,7 @@ console.log("only job from single job", job)
     description,
     requirements_and_responsibilities,
     logo_url,
-  } = job;
+  } = job || {};
 
   const { data: jobs } = useFetch(`${server}/api/v1/hiring-role/get?apiKey=g436739d6734gd6734`);
 

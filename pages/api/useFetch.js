@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 function useFetch(url) {
   const [newdata, setData] = useState([]);
   const data = newdata.Data
+  console.log("now format", data)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 

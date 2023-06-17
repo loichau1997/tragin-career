@@ -29,7 +29,7 @@ const Home = () => {
 
   // const jobs = jobsData.Data
 
-  console.log("point on job", jobs)
+  // console.log("point on job", jobs)
 
   const [selectedFilters, setSelectedFilters] = useState({});
 
