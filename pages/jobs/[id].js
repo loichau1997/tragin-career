@@ -14,40 +14,26 @@ const SingleJob = () => {
   const { id } = router.query;
   // console.log("id check", id)
   const { data: job, loading } = useFetch(`${server}/api/v1/hiring-role/get/${id}?apiKey=g436739d6734gd6734`);
+
+console.log("env test", process.env.KEY)
+
 // const job = jobData.Data
 
 console.log("only job from single job", job)
 
-  // const {
-  //   title,
-  //   category,
-  //   working_type,
-  //   tag,
-  //   experience_level,
-  //   position_type,
-  //   salary_range,
-  //   experience,
-  //   description,
-  //   requirements_and_responsibilities,
-  //   logo_url,
-  // } = job;
-
-  // if (job) {
-  //   const {
-  //     title,
-  //     category,
-  //     working_type,
-  //     tag,
-  //     experience_level,
-  //     position_type,
-  //     salary_range,
-  //     experience,
-  //     description,
-  //     requirements_and_responsibilities,
-  //     logo_url,
-  //   } = job;
-  //   // do something with the properties
-  // }
+  const {
+    title,
+    category,
+    working_type,
+    tag,
+    experience_level,
+    position_type,
+    salary_range,
+    experience,
+    description,
+    requirements_and_responsibilities,
+    logo_url,
+  } = job;
 
   const { data: jobs } = useFetch(`${server}/api/v1/hiring-role/get?apiKey=g436739d6734gd6734`);
 
@@ -58,7 +44,7 @@ console.log("only job from single job", job)
   const relatedJobs = jobs?.filter(
     (job) => 
       !id.includes(job.id) && // this will exclude the jobs that have the same id as the current job
-      (job.title === title || job.category === category)
+      (job?.title === title || job?.category === category)
   );
 
   const alertHandalar = ()=>{
