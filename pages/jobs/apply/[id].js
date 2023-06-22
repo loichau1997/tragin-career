@@ -144,10 +144,14 @@ const Appy = () => {
           </div>
           <div className="flex-align-center flex-col sm:flex-row gap-4 mt-5">
             <div className="form-input w-full sm:flex-1 relative">
-              <input type="number" name="phone" className="input" required />
-              <label htmlFor="phone">Phone number</label>
+              <input type="text" name="email" className="input" required />
+              <label htmlFor="email">Email</label>
             </div>
             <div className="form-input w-full sm:flex-1 relative">
+              <input type="text" name="Country" className="input" required />
+              <label htmlFor="email">Country</label>
+            </div>
+            {/* <div className="form-input w-full sm:flex-1 relative">
               <select className="input" required>
                 <option value="uganda">UK</option>
                 <option value="uganda">USA</option>
@@ -157,26 +161,69 @@ const Appy = () => {
                 <option value="uganda">India</option>
               </select>
               <label htmlFor="name">Country</label>
-            </div>
+            </div> */}
           </div>
           <div className="form-input w-full sm:flex-1 relative mt-5">
             <input
               type="text"
-              name="email"
+              name="skills"
               className="input"
              
               
               required
             />
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="skill">Skills</label>
+          </div>
+          <div className="form-input w-full sm:flex-1 relative mt-5">
+            <input
+              type="text"
+              name="qualification"
+              className="input"
+             
+              
+              required
+            />
+            <label htmlFor="qualification">Qualification</label>
           </div>
           <div className="form-input w-full sm:flex-1 relative mt-5">
             <textarea
-              name="name"
+              name="abouttrigan"
               className="input !h-20 pt-2"
               required
             ></textarea>
-            <label htmlFor="name">Short Bio</label>
+            <label htmlFor="about">About Trigan</label>
+          </div>
+          <div className="form-input w-full sm:flex-1 relative mt-5">
+            <textarea
+              name="joiningreson"
+              className="input !h-20 pt-2"
+              required
+            ></textarea>
+            <label htmlFor="joining">Joining Reason</label>
+          </div>
+          <div className="form-input w-full sm:flex-1 relative mt-5">
+            <textarea
+              name="contributionplan"
+              className="input !h-20 pt-2"
+              required
+            ></textarea>
+            <label htmlFor="contributionplan">Contribution Plan</label>
+          </div>
+          <div className="form-input w-full sm:flex-1 relative mt-5">
+            <textarea
+              name="interestedtropic"
+              className="input !h-20 pt-2"
+              required
+            ></textarea>
+            <label htmlFor="intrestedtropic">Interested Tropic</label>
+          </div>
+          <div className="form-input w-full sm:flex-1 relative mt-5">
+            <textarea
+              name="timespend"
+              className="input !h-20 pt-2"
+              required
+            ></textarea>
+            <label htmlFor="timespend">Time Spend</label>
           </div>
           <div className="input-check">
             <input type="checkbox" name="" id="terms" />
