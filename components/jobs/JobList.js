@@ -84,7 +84,11 @@ const JobList = ({ jobs, loading }) => {
                     </a>
                   </Link>
 
-                  <Link href="/apply">
+                  <Link 
+                     href="/jobs/apply/[id]" as={`/jobs/apply/${job?.id}`}
+                  // href="/apply"
+                  
+                  >
                     <a className="btn btn-primary flex-shrink-0">apply now</a>
                   </Link>
                 </div>

@@ -12,10 +12,10 @@ import Swal from "sweetalert2";
 const SingleJob = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log("id check", id)
+  // console.log("id check", id)
   const { data: job, loading } = useFetch(`${server}/api/v1/hiring-role/get/${id}?apiKey=g436739d6734gd6734`);
-console.log("loading test", loading)
-  console.log("only job from single job", job)
+// console.log("loading test", loading)
+  // console.log("only job from single job", job)
 // console.log("env test", process.env.KEY)
 
 
@@ -198,12 +198,18 @@ console.log("loading test", loading)
 
 
               <div className="flex justify-end mt-3">
-                <button
+                {/* <button
                 onClick={alertHandalar}
                   className="btn btn-primary flex-shrink-0"
                 >
                   apply now
-                </button>
+                </button> */}
+                <Link
+            href="/jobs/apply/[id]" as={`/jobs/apply/${job?.id}`}
+                  className="btn btn-primary flex-shrink-0"
+                >
+                  apply now
+                </Link>
               </div>
             </div>
           </div>
