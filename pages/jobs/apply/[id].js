@@ -5,14 +5,24 @@ import { FaLinkedin } from "react-icons/fa";
 import { FiChevronLeft } from "react-icons/fi";
 import Link from "next/link";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
+import useFetch from "../../api/useFetch";
+import { server } from "../../../config";
+import moment from "moment";
 
 const Appy = () => {
 
 
+    const router = useRouter();
+    const { id } = router.query;
+    console.log("id check from apply ", id)
+
+    const { data: job, loading } = useFetch(`${server}/api/v1/hiring-role/get/${id}?apiKey=g436739d6734gd6734`);
+    console.log("loading test from apply", loading)
+      console.log("only job from single job from apply", job?.working_type)
 
 
 
-    
   const fileInput = useRef(null);
   const [file, setFile] = useState("");
 
@@ -51,10 +61,12 @@ const Appy = () => {
         </div>
 
         <div className="mt-10">
-          <h1 className="text-xl font-semibold">UI/UX Designer</h1>
+          <h1 className="text-xl font-semibold">{job?.title}</h1>
           <p className="text-sm">
-            <span className="mr-4">California, USA</span>
-            <span>3 days ago</span>
+            <span className="mr-4 capitalize">{job?.working_type}</span>
+            {/* <span className="mr-4">California, USA</span> */}
+            {/* <span>3 days ago</span> */}
+            <span>{moment(job?.created_at).startOf('day').fromNow()}</span>
           </p>
         </div>
         <div className="py-4 mt-3 border-y dark:border-hover-color">

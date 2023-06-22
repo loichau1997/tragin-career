@@ -5,6 +5,7 @@ import { FaBookmark } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Skeleton from "../loading-skeleton/Skeleton";
 import Swal from "sweetalert2";
+import moment from "moment";
 const JobList = ({ jobs, loading }) => {
 
   const alertHandalar = () => {
@@ -41,7 +42,7 @@ const JobList = ({ jobs, loading }) => {
                       </a>
                     </Link>
                     <p className="text-sm">
-                      <span className="text-xl "></span>3 days ago
+                      <span className="text-xl "></span> {moment(job?.created_at).startOf('day').fromNow()}
                     </p>
                   </div>
                 </div>

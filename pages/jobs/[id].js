@@ -8,15 +8,16 @@ import { useRouter } from "next/router";
 import useFetch from "../api/useFetch";
 import { server } from "../../config";
 import Swal from "sweetalert2";
+import moment from "moment";
 
 const SingleJob = () => {
   const router = useRouter();
   const { id } = router.query;
   // console.log("id check", id)
   const { data: job, loading } = useFetch(`${server}/api/v1/hiring-role/get/${id}?apiKey=g436739d6734gd6734`);
-// console.log("loading test", loading)
+  // console.log("loading test", loading)
   // console.log("only job from single job", job)
-// console.log("env test", process.env.KEY)
+  // console.log("env test", process.env.KEY)
 
 
 
@@ -66,15 +67,15 @@ const SingleJob = () => {
 
   // const jobs = jobsData.data
 
-  console.log("job test on id", jobs)
+  // console.log("job test on id", jobs)
 
   const relatedJobs = jobs?.filter(
-    (job) => 
+    (job) =>
       !id.includes(job.id) && // this will exclude the jobs that have the same id as the current job
       (job?.title === title || job?.category === category)
   );
 
-  const alertHandalar = ()=>{
+  const alertHandalar = () => {
     Swal.fire({
       icon: 'info',
       title: 'Oops...',
@@ -85,7 +86,7 @@ const SingleJob = () => {
       confirmButtonText: 'Yes, got it!'
     })
   }
-  
+
 
   return !loading ? (
     <div className="grid md:grid-cols-3 gap-x-14">
@@ -118,11 +119,11 @@ const SingleJob = () => {
             <div className="flex-center-between gap-x-2 mt-1">
               <p className="text-sm">
                 {/* <span className="text-primary">{category}</span>{" "} */}
-                <span className="text-primary">{job?.working_type}</span>
+                <span className="text-primary capitalize">{job?.working_type}</span>
               </p>
 
               <span className="text-sm ">
-                <span className="text-muted mr-4">Posted 8 days ago</span> 98
+                <span className="text-muted mr-4">Posted <span className="mr-1">  </span> {moment(job?.created_at).startOf('day').fromNow()}</span> 98
                 Applicants
               </span>
             </div>
@@ -157,7 +158,12 @@ const SingleJob = () => {
                     <h1 className="capitalize">{job?.position_type}</h1>
                   </div>
                   <div className="w-full h-[1px] sm:h-16 sm:w-[1px] bg-slate-200 dark:bg-hover-color"></div>
-         
+                  <div className="p-2">
+                    <span className="text-sm capitalize text-muted">
+                      work type
+                    </span>
+                    <h1 className="capitalize">{job?.working_type}</h1>
+                  </div>
                 </div>
               </div>
             </div>
@@ -171,7 +177,7 @@ const SingleJob = () => {
             {/*---------------------------------------- Job Description And Others------------------------------------- */}
             <div className="mt-4">
               <h1 className="text-lg font-semibold">
-              Requirements
+                Requirements
               </h1>
               <div className="mt-3">
                 {job?.requirement?.map((res, i) => (
@@ -183,7 +189,7 @@ const SingleJob = () => {
               </div>
 
               <h1 className="text-lg mt-3 font-semibold">
-                Responsibilities 
+                Responsibilities
               </h1>
               <div className="mt-3">
                 {job?.responsibility?.map((res, i) => (
@@ -205,7 +211,7 @@ const SingleJob = () => {
                   apply now
                 </button> */}
                 <Link
-            href="/jobs/apply/[id]" as={`/jobs/apply/${job?.id}`}
+                  href="/jobs/apply/[id]" as={`/jobs/apply/${job?.id}`}
                   className="btn btn-primary flex-shrink-0"
                 >
                   apply now
