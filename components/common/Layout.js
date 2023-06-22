@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
       <Meta />
       {showLoader && <Loader />}
       <BackToTopButton showButton={showButton} />
-      <Navbar />
+      {/* <Navbar /> */}
       <div
         className="px-[2%] md:px-[6%] 2xl:container 2xl:mx-auto 2xl:!px-0 min-h-screen pt-20"
         onClick={handleCloseDropdown}

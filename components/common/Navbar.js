@@ -95,7 +95,7 @@ const Navbar = () => {
 
       <div className="flex-align-center space-x-2">
         {/*-------------------------------- Post Job------------------------------------------------------- */}
-        <Link href="/post">
+        {/* <Link href="/post">
           <a
             className={`btn !p-2 md:!px-4 btn-primary-light flex-align-center gap-x-2 ${showSearchBar && "hidden"
               }`}
@@ -105,7 +105,7 @@ const Navbar = () => {
         </Link>
 
 
-        <div className="w-[1px] h-6 bg-slate-200 dark:bg-slate-700"></div>
+        <div className="w-[1px] h-6 bg-slate-200 dark:bg-slate-700"></div> */}
 
 
         {/*------------------------------- Mobile Menu Toogle------------------------- */}

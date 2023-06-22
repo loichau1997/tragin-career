@@ -90,7 +90,7 @@ const JobList = ({ jobs, loading }) => {
                   // href="/apply"
                   
                   >
-                    <a className="btn btn-primary flex-shrink-0">apply now</a>
+                    <a className="btn btn-primary flex-shrink-0   dark:hover:bg-[#7e22ce]">apply now</a>
                   </Link>
                 </div>
               </div>

@@ -182,7 +182,7 @@ const Appy = () => {
             <input type="checkbox" name="" id="terms" />
             <label htmlFor="terms">I agree to the terms & conditions</label>
           </div>
-          <button onClick={alertHandalar} className="btn btn-primary w-full my-4">
+          <button onClick={alertHandalar} className="btn btn-primary w-full my-4 dark:hover:bg-[#7e22ce]">
             submit application
           </button>
         </form>

@@ -9,6 +9,7 @@ import useFetch from "../api/useFetch";
 import { server } from "../../config";
 import Swal from "sweetalert2";
 import moment from "moment";
+import { FiChevronLeft } from "react-icons/fi";
 
 const SingleJob = () => {
   const router = useRouter();
@@ -89,7 +90,22 @@ const SingleJob = () => {
 
 
   return !loading ? (
+    <>
+  
+  <button className="btn mb-5 bg-slate-200 hover:bg-slate-300 dark:bg-dark-card dark:hover:bg-hover-color">
+          <Link href="/">
+            <a className="flex-align-center gap-2">
+              <FiChevronLeft />
+              <span>home</span>
+            </a>
+          </Link>
+        </button>
+
+
     <div className="grid md:grid-cols-3 gap-x-14">
+
+
+
       <div className="md:col-span-2 h-fit md:sticky top-0">
         <div className="card overflow-hidden">
           <div className="relative">
@@ -225,6 +241,7 @@ const SingleJob = () => {
         <RelatedJobs jobs={relatedJobs} />
       </div>
     </div>
+    </>
   ) : (
     <div className="min-h-screen flex-center-center">
       <div className="loader" />

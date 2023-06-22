@@ -29,7 +29,7 @@ const JobAlert = () => {
         className="mt-3 p-2 rounded-md border-none outline-none placeholder:text-sm placeholder:text-muted bg-slate-100 dark:bg-hover-color w-full"
         placeholder="Type Your Email here"
       />
-      <button onClick={alertHandalar} className="w-full py-2 text-primary border border-primary rounded-md capitalize my-3 shadow-sm shadow-green-400/50 hover:shadow-green-400">
+      <button onClick={alertHandalar} className="w-full py-2 text-primary border border-primary rounded-md capitalize my-3 shadow-sm shadow-green-400/50 hover:shadow-purple-700">
         create job alert
       </button>
     </div>
