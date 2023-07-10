@@ -275,3 +275,16 @@ input:-webkit-autofill ~ label {
 .react-calendar__tile--now {
   @apply text-slate-500 rounded-lg;
 }
+
+#applicant_form label {
+  font-size: smaller;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#applicant_form input, select, option {
+  height: 35px;
+  padding: 0px 10px;
+  color: black;
+}
