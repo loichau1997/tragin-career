@@ -124,8 +124,6 @@ const Appy = () => {
                 type="text"
                 name="name"
                 className="input"
-             
-             
                 required
               />
               <label htmlFor="name">First Name</label>
@@ -135,8 +133,6 @@ const Appy = () => {
                 type="text"
                 name="name"
                 className="input"
-              
-             
                 required
               />
               <label htmlFor="name">Last Name</label>

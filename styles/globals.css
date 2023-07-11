@@ -170,7 +170,7 @@ input:-webkit-autofill:active {
 }
 
 .form-input .input {
-  @apply outline-none h-8 border border-slate-300  dark:border-hover-color bg-main dark:bg-dark-main  rounded-md px-[0.8rem] w-full text-base mb-5;
+  @apply outline-none h-8 border border-slate-300  dark:border-hover-color bg-main dark:bg-dark-main  rounded-md px-[0.8rem] w-full text-base mb-5 text-white;
 }
 
 .form-input label,

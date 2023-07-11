@@ -194,8 +194,8 @@ const Home = () => {
         className="bg-no-repeat bg-cover rounded-lg text-slate-300"
       >
         <div className="px-6 pt-4">
-          <h1 className="font-bold text-2xl">Let's find your dream Job</h1>
-          <p>Tuesday, 24 Jan 2023</p>
+          <h1 className="font-bold text-2xl">Let&apos;s find your dream Job</h1>
+          <p>{ new Date().toUTCString() }</p>
         </div>
 
         <div className="mt-10">
