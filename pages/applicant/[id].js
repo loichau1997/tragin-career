@@ -3,34 +3,76 @@ import { useRouter } from "next/router";
 import { FiChevronLeft } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { CountryDropdown } from 'react-country-region-selector';
-import Section from "../../components/applicant/Section";
+import YoutubeEmbed from "../utils/YoutubeEmbed";
+import MiniSpinner from "../utils/MiniSpinner";
+import APIService from "../api_v2";
+import Swal from "sweetalert2";
+import ApplicantProcess from "../../components/applicant_process";
+import DatetimeConverter from "../utils/DateConverter";
 
 const ApplyPage = () => {
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState({ nationality: '', country: '' })
+  const [process, setProcess] = useState([]);
   const [info, setInfo] = useState(null);
+  const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter();
   const { id } = router.query;
-
   const handleData = (e) => {
-    setInfo(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    setInfo(prev => ({ ...prev, [e.target.id]: e.target.value }))
+  }
+
+  const handleCountry = (value) => {
+    setInfo(prev => ({ ...prev, "country": value }))
+  }
+
+  const handleNationality = (e) => {
+    setInfo(prev => ({ ...prev, "nationality": value }))
+  }
+
+  const updateProfile = async () => {
+    setIsUpdatingProfile(true)
+    if (info !== null && info !== undefined) {
+      await APIService.applicant.UpdateApplicantProfile(info.id, info)
+        .then((response) => {
+          const status = response.status
+          if (status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Profile Updated',
+              showConfirmButton: false,
+              position: 'top-end',
+              toast: true,
+              timer: 2000
+            })
+          }
+        })
+    }
+    setIsUpdatingProfile(false)
   }
 
   const getData = async () => {
     setLoading(true);
-    await fetch(`https://test1.trigan.org/api/v1/hiring-role-applicant/get/${id}?apiKey=g436739d6734gd6734`)
-      .then((response) => response.json())
-      .then(({ Data }) => {
-        setInfo(Data);
-        setCountries({ nationality: Data?.nationality, country: Data?.country })
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
+    if (id !== undefined) {
+      await APIService.applicant.GetApplicantByKey(id, false)
+        .then((response) => response.data)
+        .then((responseDetail) => {
+          const { Data } = responseDetail
+          if (Data?.hiring_role_process_step !== undefined) {
+            setProcess(Data?.hiring_role_process_step)
+          }
+          const { id, created_at, updated_at, first_name, last_name, email, nationality, skill, qualification } = Data
+          setInfo({ id, created_at, updated_at, first_name, last_name, email, nationality, skill, qualification });
+          setCountries({ nationality: Data?.nationality, country: Data?.country })
+        })
+        .finally(() => setLoading(false));
+    }
   }
 
   useEffect(() => {
     getData();
-  }, [])
+  }, [id])
 
   useEffect(() => {
     setInfo(prev => ({ ...prev, country: countries.country, nationality: countries.nationality }));
@@ -64,20 +106,28 @@ const ApplyPage = () => {
           </div>
 
           <h1 className="mb-4">Applicant ID: {id}</h1>
+          <div className="flex flex-row gap-4 w-full justify-between pb-5">
+              <div className="flex flex-col w-1/2 gap-y-4">
+                <label>Created At {DatetimeConverter(info?.created_at)}</label>
+              </div>
+              <div className="flex flex-col w-1/2 gap-y-4">
+                <span>Updated At {DatetimeConverter(info?.created_at)}</span>
+              </div>
+            </div>
           <form id="applicant_form" className="w-full flex flex-col">
             <div className="flex flex-row gap-4 w-full justify-between">
               <div className="flex flex-col w-1/2 gap-y-4">
                 <label htmlFor="first_name">
                   First name:
-                  <input id="first_name" type="text" defaultValue={info?.first_name} onChange={(e) => handleData(e)} required />
+                  <input className="dark:bg-blue-200" id="first_name" type="text" defaultValue={info?.first_name} onChange={(e) => handleData(e)} required />
                 </label>
                 <label htmlFor="last_name">
                   Last name:
-                  <input id="last_name" type="text" defaultValue={info?.last_name} onChange={(e) => handleData(e)} required />
+                  <input className="dark:bg-blue-200" id="last_name" type="text" defaultValue={info?.last_name} onChange={(e) => handleData(e)} required />
                 </label>
                 <label htmlFor="email">
                   E-mail address:
-                  <input id="email" type="email" defaultValue={info?.email} onChange={(e) => handleData(e)} required />
+                  <input disabled={true} className="dark:bg-blue-200" id="email" type="email" defaultValue={info?.email} onChange={(e) => handleData(e)} required />
                 </label>
               </div>
 
@@ -85,31 +135,35 @@ const ApplyPage = () => {
                 <label htmlFor="nationality">
                   <span className="text-sm">Nationality:</span>
                   <CountryDropdown
-                    value={countries.nationality}
-                    onChange={(e) => setCountries(prev => ({ ...prev, nationality: e }))}
+                    className="dark:bg-blue-200"
+                    value={info?.country}
+                    onChange={(e) => handleCountry(e)}
                   />
                 </label>
                 <label htmlFor="country">
                   <span className="text-sm">Country:</span>
                   <CountryDropdown
+                    className="dark:bg-blue-200"
                     name='country'
-                    value={countries.country}
-                    onChange={(e) => setCountries(prev => ({ ...prev, country: e }))}
+                    value={info?.nationality}
+                    onChange={(e) => handleNationality(e)}
                   />
                 </label>
-                <div className="flex flex-row gap-x-2 items-center text-lg h-20">
-                  <input id="rules_comply" type="checkbox" required defaultChecked={false} />
+                {/* <div className="flex flex-row gap-x-2 items-center text-lg h-20">
+                  <input className="dark:bg-blue-200" id="rules_comply" type="checkbox" required defaultChecked={false} />
                   <label htmlFor="rules_comply">
                     I have read, understand, and agree to the rules and privacy data
                   </label>
-                </div>
+                </div> */}
               </div>
             </div>
 
-            <div className="flex flex-col gap-y-6">
+            <div className="flex pt-5 flex-col gap-y-6">
               <label htmlFor="skill">
                 Skill:
                 <input
+                  id="skill"
+                  className="dark:bg-blue-200"
                   name="skill"
                   type="text"
                   value={info?.skill}
@@ -119,6 +173,8 @@ const ApplyPage = () => {
               <label htmlFor="qualification">
                 Qualification:
                 <input
+                  id="qualification"
+                  className="dark:bg-blue-200"
                   name="qualification"
                   type="text"
                   value={info?.qualification}
@@ -126,88 +182,18 @@ const ApplyPage = () => {
                 />
               </label>
             </div>
+            <div className="flex flex-row gap-4 pt-5">
+              <button onClick={updateProfile} type='button' className="btn btn-primary flex-shrink-0 dark:hover:bg-[#7e22ce]">Update my profile</button>
+              {isUpdatingProfile && <MiniSpinner />}
+            </div>
 
             <div className="flex flex-col gap-y-8 mt-10">
               <h1 className="text-xl w-full border-b-[0.5px]">Recruitment Process</h1>
-
-              <Section step="Step 1 - Get to know Trigan">
-                <label htmlFor="known_about_trigan">
-                  Lorem ipsum dolor tal quale
-                  <textarea
-                    id='known_about_trigan'
-                    name='known_about_trigan'
-                    placeholder="Type your answer here"
-                    className="p-2 text-black"
-                    defaultValue={info?.known_about_trigan}
-                    onChange={(e) => handleData(e)}
-                  >
-                  </textarea>
-                </label>
-                <div className="flex flex-row gap-4">
-                  <button type='file' className="bg-slate-300 p-2 px-4 text-black w-32 text-sm">Send file</button>
-                  <button type='file' className="bg-red-300 p-2 px-4 text-black w-32 text-sm">Pass button</button>
-                </div>
-              </Section>
-
-              <Section step="Step 2 - Joining Reason">
-                <label htmlFor="joining_reason">
-                  Lorem ipsum dolor tal quale
-                  <textarea
-                    id='joining_reason'
-                    name='joining_reason'
-                    placeholder="Type your answer here"
-                    className="p-2 text-black"
-                    defaultValue={info?.joining_reason}
-                    onChange={(e) => handleData(e)}
-                  >
-                  </textarea>
-                </label>
-                <div className="flex flex-row gap-4">
-                  <button type='file' className="bg-slate-300 p-2 px-4 text-black w-32 text-sm">Send file</button>
-                  <button type='file' className="bg-red-300 p-2 px-4 text-black w-32 text-sm">Pass button</button>
-                </div>
-              </Section>
-
-              <Section step="Step 3 - Contribution plan">
-                <label htmlFor="contribution_plan">
-                  Lorem ipsum dolor tal quale
-                  <textarea
-                    id='contribution_plan'
-                    name='contribution_plan'
-                    placeholder="Type your answer here"
-                    className="p-2 text-black"
-                    defaultValue={info?.contribution_plan}
-                    onChange={(e) => handleData(e)}
-                  >
-                  </textarea>
-                </label>
-                <div className="flex flex-row gap-4">
-                  <button type='file' className="bg-slate-300 p-2 px-4 text-black w-32 text-sm">Send file</button>
-                  <button type='file' className="bg-red-300 p-2 px-4 text-black w-32 text-sm">Pass button</button>
-                </div>
-              </Section>
-
-              <Section step="Step 4 - Interested topic">
-                <label htmlFor="interested_topic">
-                  Lorem ipsum dolor tal quale
-                  <textarea
-                    id='interested_topic'
-                    name='interested_topic'
-                    placeholder="Type your answer here"
-                    className="p-2 text-black"
-                    defaultValue={info?.interest_topic}
-                    onChange={(e) => handleData(e)}
-                  >
-                  </textarea>
-                </label>
-                <div className="flex flex-row gap-4">
-                  <button type='file' className="bg-slate-300 p-2 px-4 text-black w-32 text-sm">Send file</button>
-                  <button type='file' className="bg-red-300 p-2 px-4 text-black w-32 text-sm">Pass button</button>
-                </div>
-              </Section>
-
+              {process.map((value) => (
+                <ApplicantProcess process={value} />
+              ))
+              }
             </div>
-
           </form>
         </div>
       </div>

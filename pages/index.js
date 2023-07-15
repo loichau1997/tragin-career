@@ -195,7 +195,7 @@ const Home = () => {
       >
         <div className="px-6 pt-4">
           <h1 className="font-bold text-2xl">Let&apos;s find your dream Job</h1>
-          <p>{ new Date().toUTCString() }</p>
+          <p>{new Date().toUTCString()}</p>
         </div>
 
         <div className="mt-10">

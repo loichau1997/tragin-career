@@ -3,11 +3,10 @@ import { VscTriangleDown, VscTriangleUp } from 'react-icons/vsc';
 import { IconContext } from 'react-icons/lib';
 
 const Section = (props) => {
-  const [expanded, setExpanded] = useState(true);
-
+  const [expanded, setExpanded] = useState(!props.is_passed);
   return (
     <div className={`border-cyan-50 border-[0.2px] border-opacity-40 rounded-md ${expanded ? 'rounded-bl-3xl border-cyan700' : ''}`}>
-      <div className={`p-4 bg-cyan-700 rounded-md flex flex-row justify-between ${expanded ? 'rounded-bl-none rounded-br-none' : ''} `} role="button" onClick={() => setExpanded(prev => !prev)}>
+      <div className={`p-4 ${props.is_passed ? "bg-green-600" : "bg-cyan-700"} rounded-md flex flex-row justify-between ${expanded ? 'rounded-bl-none rounded-br-none' : ''} `} role="button" onClick={() => setExpanded(prev => !prev)}>
         <span className='font-extrabold'>{props.step}</span>
         <IconContext.Provider value={{ size: '24px' }}>
           { expanded ? <VscTriangleUp /> : <VscTriangleDown /> }
