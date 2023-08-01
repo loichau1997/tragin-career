@@ -22,7 +22,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "react-paginate": "^8.1.4",
-    "sweetalert2": "^11.7.12"
+    "sweetalert2": "^11.7.16"
   },
   "devDependencies": {
     "@types/node": "20.4.2",
