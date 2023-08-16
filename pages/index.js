@@ -16,7 +16,7 @@ import { useUiContext } from "../contexts/UiContext";
 import { actioTypes } from "../reducers/uiReducer";
 import useFetch from "./api/useFetch";
 import { server } from "../config";
-
+import Header from "../components/header/Header";
 const Home = () => {
   const { isFilterMenuOpen, dispatch } = useUiContext();
   const handleCloseFiltermenu = (e) => {

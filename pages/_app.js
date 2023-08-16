@@ -5,6 +5,8 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { UiProvider } from "../contexts/UiContext";
 import { AnimatePresence } from "framer-motion";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 function MyApp({ Component, pageProps }) {
   Router.events.on("routeChangeStart", () => {
@@ -18,9 +20,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <UiProvider>
       <AnimatePresence>
-        <Layout>
+        <Header />
+        <Layout>  
           <Component {...pageProps} />
         </Layout>
+        <Footer />
       </AnimatePresence>
     </UiProvider>
   );
